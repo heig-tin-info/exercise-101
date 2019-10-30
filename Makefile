@@ -1,6 +1,5 @@
-CSRCS=$(wildcard *.c)
+CSRCS=$(wildcard **/*.c)
 COBJS=$(patsubst %.c,%.o,$(CSRCS))
-EXEC=$(patsubst %.c,%, $(word 1, $(CSRCS)))
 
 CFLAGS=-std=c99 -g -Wall -pedantic
 LDFLAGS=-lm

@@ -1,9 +1,9 @@
-  
+
 *.o
 *.d
-a.out
+*.out
 dart
 __pycache__
 .vscode/settings.json
 armstrong
-*.so
+*.so*.out
