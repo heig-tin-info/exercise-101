@@ -27,10 +27,10 @@ class Program:
             self.errors = self.source.errors
         return not result
 
-    def run(self):
+    def run(self, *args, stdin=None):
         if self.executable:
             self.build()
-        return self.executable.run()
+        return self.executable.run(*args, stdin=stdin)
 
 
 class Source:
@@ -87,13 +87,16 @@ class Executable:
         if not self._is_executable(filename):
             raise ValueError("Program %s is not executable!" % filename)
 
-    @lru_cache(maxsize=16)
+    #@lru_cache(maxsize=16)
     def run(self, *args, stdin=None):
         p = subprocess.Popen([self.filename, *[str(a) for a in args]],
                              stdout=subprocess.PIPE,
                              stdin=subprocess.PIPE,
-                             stderr=subprocess.STDOUT)
+                             stderr=subprocess.PIPE)
 
+        if isinstance(stdin, str):
+            stdin = stdin.encode('utf8')
+            
         stdout, stderr = p.communicate(input=stdin)
         stdout = stdout.decode('utf8') if stdout else None
         stderr = stderr.decode('utf8') if stderr else None

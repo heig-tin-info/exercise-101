@@ -3,7 +3,6 @@ from random import randint
 from numpy import mean
 from helper import Executable, Test, Source, Program
 from itertools import permutations
-
 import codecs
 
 class TestArguments(Test):
@@ -94,5 +93,67 @@ class TestArguments(Test):
     #     args = [randint(2048) for i in range(10)]
     #     self.test("./4.out %s" % (" ".join(map(str, args))),
     #         P(args).stdout.match(str(mean(args))))
+
+
+    def test_scanf_1(self):
+        "scanf/1.c"
+        p = Program('scanf/1.c')
+        self.test("Utiliser scanf ?", p.source.grep(r'\bscanf\b'))
+        self.test("Petit oiseau (&) ?", p.source.grep(r'&\w+'))
+        self.test("Utiliser printf ?", p.source.grep(r'\bprintf\b'))
+
+        self.test("Programme compile sans erreurs ?", p.build())
+        self.test("Programme compile sans warnings ?", p.warnings == 0)
+
+        self.test("Erreur en retour pour 'echo oops | ./1.out' ?", p.run(stdin=b'oops').exit_status == 1)
+        self.test("Affichage correct sur stdout ?", p.run(stdin=b'22').stdout.match(r'22'))
+
+    def test_scanf_2(self):
+        "scanf/2.c"
+        p = Program('scanf/2.c')
+        self.test("Utiliser scanf une fois ?", len(p.source.grep(r'\bscanf\s*\(')) == 1)
+        self.test("Deux Petits oiseaux (&) ?", len(p.source.grep(r'&\w+')) == 2)
+        self.test("Utiliser printf une fois ?", len(p.source.grep(r'\bprintf\b')) == 1)
+
+        self.test("Programme compile sans erreurs ?", p.build())
+        self.test("Programme compile sans warnings ?", p.warnings == 0)
+
+        self.test("Erreur en retour pour 'echo oops | ./1.out' ?", p.run(stdin=b'oops').exit_status == 1)
+        self.test("Affichage correct sur stdout ?", p.run(stdin=b'312 411').stdout.match(r'723'))  
+
+    def test_scanf_3(self):
+        "scanf/3.c"
+        p = Program('scanf/3.c')
+        self.test("Utiliser scanf une fois ?", len(p.source.grep(r'\bscanf\s*\(')) == 1)
+        self.test("Pas d'esperluette ! hein sérieux ?", len(p.source.grep(r'&\w+')) == 0)
+        match = p.source.grep(r'\bcountry\s*\[\s*(\d+)\s*\]')
+        self.test("Accepte des grands pays comme 'The United Kingdom of Great Britain and Northern Ireland' ?", len(match) > 0 and int(match[0]) > 48)
+
+        self.test("Programme compile sans erreurs ?", p.build())
+        self.test("Programme compile sans warnings ?", p.warnings == 0)
+
+        country = "Switzerland"
+        self.test("Affichage correct sur stdout ?", p.run(stdin=bytes(country, 'utf8')).stdout.match(r'Le pays est:\s*' + country))                 
+
+    def test_scanf_4(self):
+        "scanf/4.c"
+        import numpy as np
+
+        p = Program('scanf/4.c')
+        self.test("Utiliser scanf une fois ?", len(p.source.grep(r'\bscanf\s*\(')) == 1)
+        self.test("Utiliser une boucle 'for' ou 'while' ?", p.source.match(r'\b(for|while)\b'))
+        self.test("Un seul et commercial ?", len(p.source.grep(r'&\w+')) == 1)
+        self.test("Feof utilisé ?", p.source.match(r'feof'))
+        self.test("Programme compile sans erreurs ?", p.build())
+        self.test("Programme compile sans warnings ?", p.warnings == 0)
+        
+        n = 1000
+        vector = np.random.randint(255, size=n)
+        mean = np.mean(vector)
+        self.test(f"Affichage correct sur stdout pour {n} valeurs ?", 
+            p.run(stdin=' '.join(map(str, vector)))
+                .stdout
+                .match("{:.4f}"
+                .format(mean)))                 
 
 TestArguments()
