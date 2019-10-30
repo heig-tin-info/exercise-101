@@ -4,6 +4,8 @@ from numpy import mean
 from helper import Executable, Test, Source, Program
 from itertools import permutations
 
+import codecs
+
 class TestArguments(Test):
 
     def test_printf_1(self):
@@ -30,7 +32,43 @@ class TestArguments(Test):
         self.test("Programme compile sans warnings ?", p.warnings == 0)
         self.test("pi sur stdout ?", p.run().stdout.match(r'3.141592'))
 
+    def test_printf_4(self):
+        "printf/4.c"
+        p = Program('printf/4.c')
+        self.test("Utilisation de printf ?", p.source.grep(r'printf.+\%\d+\.\d+[Ffg]'))
+        self.test("Programme compile sans erreurs ?", p.build())
+        self.test("Programme compile sans warnings ?", p.warnings == 0)
+        self.test("042.12 sur stdout ?", p.run().stdout.match(r'042.12'))
 
+    def test_printf_5(self):
+        "printf/5.c"
+        p = Program('printf/5.c')
+        self.test("Utilisation de printf ?", p.source.grep(r'printf.+\\t'))
+        self.test("Programme compile sans erreurs ?", p.build())
+        self.test("Programme compile sans warnings ?", p.warnings == 0)
+        self.test("Sortie standard correcte ?", p.run().stdout.match(r'23\t3.14150*\t6.280*\t99'))
+
+    def test_printf_6(self):
+        "printf/6.c"
+        p = Program('printf/6.c')
+        self.test("Ne pas utilser sprintf ?", not p.source.grep(r'sprintf'))
+        self.test("Programme compile sans erreurs ?", p.build())
+        self.test("Question 1 ?", p.run().stdout.match(r'Q1.+\'(z)7\1 {5}7\1\\n'))
+        self.test("Question 2 ?", p.run().stdout.match(r'Q2.+\'7{2}\.0{6}\\n'))
+        self.test("Question 3 ?", p.run().stdout.match(r'Q3.+\'36[,]1e[,]1E\\n'))
+        self.test("Question 4 ?", p.run().stdout.match(r'Q4.+\'77\\n'))
+
+    def test_printf_7(self):
+        "printf/7.c"
+        p = Program('printf/7.c')
+        self.test("Utiliser printf ?", p.source.grep(r'printf'))
+        self.test("Variable birth year correcte ?", p.source.grep(r'char\s+birth_year\s*=\s*\d{1,2}\s*;'))
+        self.test("Plus de points de suspension ?", not p.source.grep(r'\.{3}'))
+        self.test("Programme compile sans erreurs ?", p.build())
+        self.test("Programme compile sans warnings ?", p.warnings == 0)
+        self.test("Nom présent sur stdout ?", p.run().stdout.match(r'Name:\s+\S+'))
+        self.test("Année de naissance sur stdout ?", p.run().stdout.match(r'Birth Year:\s+(19|20)\d{2}'))
+        self.test("Mobile sur stdout ?", p.run().stdout.match(r'Mobile:\s+\+\d{2} (\d{2,3} ?)*\d{2,3}'))
     #     # arguments/1
     #     P = Executable('arguments/1.out')
     #     n = 5

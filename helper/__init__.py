@@ -95,6 +95,8 @@ class Executable:
                              stderr=subprocess.STDOUT)
 
         stdout, stderr = p.communicate(input=stdin)
+        stdout = stdout.decode('utf8') if stdout else None
+        stderr = stderr.decode('utf8') if stderr else None
 
         return Outputs(p.returncode, GreppableString(stdout), GreppableString(stderr))
 
