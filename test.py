@@ -175,7 +175,6 @@ class TestArguments(Test):
         self.test("Programme compile sans warnings ?", p.warnings == 0)
         self.test("Affichage correct sur stdout ?", p.run(5).stdout.match(r'125'))                 
 
-
     def test_math_2(self):
         "math/2.c"
 
@@ -184,5 +183,14 @@ class TestArguments(Test):
         self.test("Programme compile sans erreurs ?", p.build())
         self.test("Programme compile sans warnings ?", p.warnings == 0)
         self.test("Affichage correct sur stdout ?", p.run(2).stdout.match(r'1.414214'))                 
+
+    def test_exit_status_1(self):
+        "exit-status/1.c"
+
+        p = Program('exit-status/1.c')
+        self.test("Programme compile sans erreurs ?", p.build())
+        self.test("Programme compile sans warnings ?", p.warnings == 0)
+        self.test("Status de sortie ?", p.run(5).exit_status == 1 + 3 + 4 + 5)                 
+
 
 TestArguments()
