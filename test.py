@@ -156,4 +156,33 @@ class TestArguments(Test):
                 .match("{:.4f}"
                 .format(mean)))                 
 
+    def test_scanf_5(self):
+        "scanf/5.c"
+
+        p = Program('scanf/5.c')
+        self.test("Plus de blancs ?", not p.source.match(r'\.{3}'))
+        self.test("Premier blanc complété correctement ?", p.source.match(chr(38)))
+        self.test("Second blanc complété correctement ?", p.source.match(codecs.decode('nqerffr', 'rot13')))        
+        self.test("Programme compile sans erreurs ?", p.build())                   
+
+    def test_math_1(self):
+        "math/1.c"
+
+        p = Program('math/1.c')
+        self.test("Powpow power ?", p.source.match(r'\bpow.+?\b3\b\s*\)'))
+        self.test("Cast en int ?", p.source.match(r'int \w+|\(int\)\w+'))
+        self.test("Programme compile sans erreurs ?", p.build())
+        self.test("Programme compile sans warnings ?", p.warnings == 0)
+        self.test("Affichage correct sur stdout ?", p.run(5).stdout.match(r'125'))                 
+
+
+    def test_math_2(self):
+        "math/2.c"
+
+        p = Program('math/2.c')
+        self.test("Est-ce qu'u ret ?", p.source.match(r'\bsqrt\b'))
+        self.test("Programme compile sans erreurs ?", p.build())
+        self.test("Programme compile sans warnings ?", p.warnings == 0)
+        self.test("Affichage correct sur stdout ?", p.run(2).stdout.match(r'1.414214'))                 
+
 TestArguments()

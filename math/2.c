@@ -5,9 +5,12 @@
  * La même chose sur une autre ligne avec 12 chiffres après la virgule.
  */
 
+#include <math.h>
+#include <stdio.h>
+
 double foo = 2;
 
 int main(void) {
-
+    printf("%.6f", sqrt(foo));
     return 0;
 }
