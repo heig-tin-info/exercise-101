@@ -16,6 +16,8 @@ class Program:
         self.executable = None
         self.source = Source(sourcefile)
         self.path = Path(sourcefile)
+        self.warnings = None
+        self.errors = None
 
     def build(self):
         result = self.source.build()
@@ -28,9 +30,14 @@ class Program:
         return not result
 
     def run(self, *args, stdin=None):
-        if self.executable:
+        if not self.executable:
             self.build()
+        if not self.executable:
+            return Outputs(-1, '', '') # Dummy
         return self.executable.run(*args, stdin=stdin)
+
+    def __call__(self, *args, **kwargs):
+        return self.run(*args, **kwargs)
 
 
 class Source:
@@ -80,6 +87,8 @@ class Source:
         return len(self.grep(pattern)) > 0
 
 
+
+
 class Executable:
     def __init__(self, filename):
         self.filename = filename
@@ -96,7 +105,7 @@ class Executable:
 
         if isinstance(stdin, str):
             stdin = stdin.encode('utf8')
-            
+
         stdout, stderr = p.communicate(input=stdin)
         stdout = stdout.decode('utf8') if stdout else None
         stderr = stderr.decode('utf8') if stderr else None

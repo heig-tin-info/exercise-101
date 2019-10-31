@@ -1,15 +1,16 @@
 /**
  * La variance d'un vecteur est exprimé par la formule:
- * 
+ *
  * \frac{1}{N}\sum_{i=1}^N(x_i-\bar{x})^2
- * (pour voir la formule écrite en LaTeX, 
+ * (pour voir la formule écrite en LaTeX,
  *  vous pouvez utiliser: http://asciimath.org/)
- * 
+ *
  * Calculer la variance du vecteur `vector` ainsi que sa déviation sandard.
  * La déviation standard est la racine carrée de la variance.
  */
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 
 const double vector[] = {
         0.11287753, -1.41800865, -0.28742239,  1.4315401 ,  0.74161811,
@@ -40,20 +41,22 @@ int main(void) {
     // Calcul de la moyenne du vecteur
     double mean = 0;
     for (int i = 0; i < length; i++) {
-        // ...
+        mean += vector[i];// ...
     }
+    mean /= length;
 
-    printf("Moyenne: %f\n", mean); 
+    printf("Moyenne: %.8f\n", mean);
 
     // Calcul de la variance
-    double variance = 0;    
+    double variance = 0;
     for (int i = 0; i < length; i++) {
-        // ...
-    }    
+        variance += pow(vector[i] - mean, 2); // ...
+    }
+    variance /= length;
 
-    printf("Variance: %f\n", variance);
+    printf("Variance: %.8f\n", variance);
 
     // Calcul de la déviation standard
-    double std = variance;
-    printf("Déviation standard: %f\n", std);
+    double std = sqrt(variance);
+    printf("Déviation standard: %.8f\n", std);
 }

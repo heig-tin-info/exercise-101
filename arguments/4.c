@@ -1,9 +1,20 @@
 /**
  * Écrire un programme qui affiche la moyenne de tous les
- * arguments passés les nombres sont des entiers, la moyenne 
+ * arguments passés les nombres sont des entiers, la moyenne
  * est un `double` affiché avec 4 décimales.
- * 
- * Exemple: 
+ *
+ * Exemple:
  *    $ ./a.out 5 6 12 66 55 9 3
  *    22.2857
  */
+#include <stdio.h>
+#include <limits.h>
+#include <stdlib.h>
+
+int main(int argc, char * argv[]) {
+    double sum = 0;
+    for(int i = 1; i < argc; i++) {
+        sum += atoi(argv[i]);
+    }
+    printf("%.4lf\n", sum / (argc - 1));
+}
