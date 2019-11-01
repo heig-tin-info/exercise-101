@@ -9,8 +9,3 @@
 #include <stdio.h>
 
 double foo = 2;
-
-int main(void) {
-    printf("%.6f", sqrt(foo));
-    return 0;
-}

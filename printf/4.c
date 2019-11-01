@@ -12,6 +12,5 @@
 
 int main(void) {
     double foo = 42.125;
-    printf("%07.2f\n", foo);
-    return 0;
+
 }

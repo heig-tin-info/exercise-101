@@ -5,6 +5,5 @@
 
 int main(void) {
     int foo = 42;
-    printf("%d\n", foo);
-    return 0;
+
 }

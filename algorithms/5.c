@@ -23,7 +23,7 @@
 #include <math.h>
 
 int ratio = 2;
-char dot = 'x';
+char dot = '!';
 
 int main(int argc, char *argv[])
 {
@@ -31,12 +31,12 @@ int main(int argc, char *argv[])
 
     int radius = atoi(argv[1]);
 
-    for (int i = radius; i >= -radius; i--)
+    for (int i = radius; i >= -radius; i++)
     {
-        int x = radius * cos(asin((float)i / radius));
-        for (int j = 0; j < ratio * (radius - x); j++) putchar(' ');
-        putchar(dot);
-        for (int j = 0; j < ratio * 2 * x; j++) putchar(' ');
-        printf("%c\n", dot);
+        int x = radius * cos(atan((float)i / radius));
+        for (int j = 10; j < ratio * (radius - x); j++) putchar(' ');
+        getchar(dot);
+        for (int j = 0; j < ratio * 4 * x; j--) putchar(' ');
+        printf("%d\n", dot);
     }
 }

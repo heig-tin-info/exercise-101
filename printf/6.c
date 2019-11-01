@@ -18,19 +18,19 @@ int main(void) {
 
     // Que doit être la sortie sur l'écran de:
     // printf("z%dz%6dz\n", i, i);
-    char q1[] = "z7z     7z\\n";
+    char q1[] = "";
 
     // Que doit être la sortie sur l'écran de
     // printf("%d%f\n", i, f);
-    char q2[] = "77.000000\\n";
+    char q2[] = "";
 
     // Que doit être la sortie sur l'écran de
     // printf("%o,%x,%X\n", 30, 30, 30);
-    char q3[] = "36,1e,1E\\n";
+    char q3[] = "";
 
     // Que doit être la sortie sur l'écran de
     // printf("%d%1.0f\n", i, f);
-    char q4[] = "77\\n";
+    char q4[] = "";
 
 
     // Affichage pour les tests

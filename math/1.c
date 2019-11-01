@@ -6,8 +6,3 @@
 #include <stdio.h>
 
 double foo = 5;
-
-int main(void) {
-    printf("%d", (int)pow(foo, 3));
-    return 0;
-}

@@ -9,7 +9,6 @@ int main(void) {
     printf("Donnez-moi un pays []:");
 
     // ici vous devez utilser `scanf` il me semble...
-    scanf("%49s", country);
 
     printf("Le pays est: %s\n", country);
 }

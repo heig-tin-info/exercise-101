@@ -11,9 +11,3 @@ char string[] = "Joyeux ivre heureux, le nez qui pique, Clown Hary skie dans l'o
 // Indices:
 // - utiliser une boucle et `string[i]` pour accéder à un caractère.
 // - utiliser `strlen` pour connaître la taille de la chaîne de caractère.
-
-int main(void) {
-    for(int i = strlen(string) - 1; i >= 0; i--) {
-        printf("%c", string[i]);
-    }
-}

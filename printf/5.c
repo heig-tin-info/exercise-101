@@ -12,6 +12,5 @@ double baz = 6.28;
 char qux = 'c';
 
 int main(void) {
-    printf("%d\t%f\t%lf\t%d", foo, bar, baz, (int)qux);
-    return 0;
+
 }
