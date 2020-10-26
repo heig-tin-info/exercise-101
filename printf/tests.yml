@@ -1,0 +1,20 @@
+#!/bin/env/python3 -mbaygon
+---
+version: 1
+tests:
+  - name: scanf
+    tests:
+      - name: scanf/1.c
+        executable: ./1.out
+        tests:
+          - name: Affiche valeur de stdin
+            stdin: 12
+            stdout: [{contains: 12}]
+            exit: 0
+          - name: Fonctionne avec des nombres négatifs
+            stdin: -42
+            stdout: [{contains: -42}]
+            exit: 0
+          - name: Erreur en cas de mauvaise valeur
+            stdin: foo
+            exit: 1

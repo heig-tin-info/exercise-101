@@ -6,10 +6,10 @@
 int main(void) {
     char country[49];
 
-    printf("Donnez-moi un pays []:");
+    printf("Donnez-moi un pays [] :");
 
     // ici vous devez utilser `scanf` il me semble...
     scanf("%49s", country);
 
-    printf("Le pays est: %s\n", country);
+    printf("Le pays est : %s\n", country);
 }

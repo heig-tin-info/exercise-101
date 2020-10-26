@@ -1,4 +1,4 @@
-CSRCS=$(wildcard **/*.c)
+CSRCS=$(wildcard *.c)
 CEXECS=$(patsubst %.c,%.out,$(CSRCS))
 
 CFLAGS=-std=c11 -g -Wall -pedantic
@@ -10,7 +10,7 @@ $(CEXECS): %.out : %.c
 	$(CC) $(CFLAGS) $< -o$@ $(LDFLAGS)
 
 test: $(CEXECS)
-	./tests.yml
+	baygon
 
 clean:
 	$(RM) $(EXECS)
