@@ -9,8 +9,5 @@
 
 int main(void) {
     char c = 'A';
-    while(c < 'F') {
-        printf("%c-", c++);
-    }
     printf("%c", c);
 }

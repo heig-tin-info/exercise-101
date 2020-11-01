@@ -8,13 +8,6 @@
  *    22.2857
  */
 #include <stdio.h>
-#include <limits.h>
-#include <stdlib.h>
 
 int main(int argc, char * argv[]) {
-    double sum = 0;
-    for(int i = 1; i < argc; i++) {
-        sum += atoi(argv[i]);
-    }
-    printf("%.4lf\n", sum / (argc - 1));
 }

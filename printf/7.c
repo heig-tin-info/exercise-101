@@ -17,9 +17,9 @@ int main(void) {
     int_least8_t country_code = 41;
     int64_t phone = 1234567;
 
-    printf("Name:        %s\n", full_name);
-    printf("Birth Year:  %d\n", (birth_year < 50 ? 1900 : 2000) + birth_year);
-    printf("Mobile:      +%d %ld\n", country_code, phone);
+    printf("Name:        %s\n", );
+    printf("Birth Year:  %d\n", );
+    printf("Mobile:      +%d %ld\n", );
 
     return 0;
 }

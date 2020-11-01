@@ -41,7 +41,7 @@ int main(void) {
     // Calcul de la moyenne du vecteur
     double mean = 0;
     for (int i = 0; i < length; i++) {
-        mean += vector[i];// ...
+        // ...
     }
     mean /= length;
 
@@ -50,13 +50,12 @@ int main(void) {
     // Calcul de la variance
     double variance = 0;
     for (int i = 0; i < length; i++) {
-        variance += pow(vector[i] - mean, 2); // ...
+        // ...
     }
-    variance /= length;
 
     printf("Variance: %.8f\n", variance);
 
     // Calcul de la déviation standard
-    double std = sqrt(variance);
+    double std = variance;
     printf("Déviation standard: %.8f\n", std);
 }
