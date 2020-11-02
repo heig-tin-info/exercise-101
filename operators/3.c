@@ -1,5 +1,5 @@
 /**
- * Un affichage 7 segments est le suivant:
+ * Un affichage 7 segments est le suivant :
  *         a
  *        __
  *    f /   / b
@@ -15,55 +15,45 @@
  * L'etat de l'afficheur est donné par la variable `digit`.
  * Pour une valeur donnée, afficher la valeur 7 segments
  */
-
+#include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 int main(int argc, char* argv[]) {
     if (argc < 2) return 1;
 
     int value = atoi(argv[1]);
+ 
+    // À vous de compléter ceci avec la logique nécessaire
+    bool a = value & (1 << 0);
+    bool b = value & (1 << 1);
+    bool c = value & (1 << 2);
+    bool d = value & (1 << 3);
+    bool e = value & (1 << 4);
+    bool f = value & (1 << 5);
+    bool g = value & (1 << 6);
 
-    bool a;
-    bool b;
-    bool c;
-    bool d;
-    bool e;
-    bool f;
-    bool g;
-
-
-    if (a)
-        printf("---\n");
-    else
-        printf("\n");
-
-    if (f)
-        printf("/   ");
-    else
-        printf("    ");
-
-    if (b)
-        printf("/\n");
-    else
-        printf("\n");
-
-    if (g)
-        printf("---\n");
-    else
-        printf("\n");
-
-    if (e)
-        printf("/   ");
-    else
-        printf("    ");
-
-    if (c)
-        printf("/\n");
-    else
-        printf("\n");
-
-    if (d)
-        printf("---\n");
-    else
-        printf("\n");
+    // Pas besoin de toucher à ceci
+    printf(a && f ? "┌" : " ");
+    printf("%s", a ? "───" : "");
+    printf("%s", a && b ? "┐" : " ");
+    printf("\n");
+    printf("%s", f ? "|   " : "    ");
+    printf("%s\n", b ? "|" : "");
+    if (e && f && g) printf("├");
+    else if (e && f && !g) printf("│");
+    else if (e && !f && g) printf("┌");
+    else if (!e && f && g) printf("└"); 
+    else printf(" ");
+    printf("%s", g ? "───" : "   ");
+    if (b && c && g) printf("┤");
+    else if (b && c && !g) printf("│");
+    else if (b && !c && g) printf("┘");
+    else if (!b && c && g) printf("┐");
+    printf("\n");
+    printf("%s", e ? "|   " : "    ");
+    printf("%s\n", c ? "|" : "");
+    printf("%s", d && e ? "└" : " ");
+    printf("%s", d ? "───" : "");
+    printf("%s", c && d ? "┘" : " ");
 }

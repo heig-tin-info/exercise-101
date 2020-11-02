@@ -1,0 +1,86 @@
+#!/bin/env/python3 -mbaygon
+---
+version: 1
+tests:
+  - name: operators
+    tests:
+      - name: operators/1.c
+        executable: ./1.out
+        tests:
+          - name: Toutes les pompes ok
+            args: [0,0,0,0]
+            stdout: [{regex: "Ou+f+"}]
+          - name: Une pompe en défaut
+            args: [1,0,0,0]
+            stdout: [{regex: "Al+a+rme"}]            
+          - name: Deux pompes en défaut
+            args: [1,0,1,0]
+            stdout: [{regex: "Al+a+rme"}]            
+          - name: Trois pompes en défaut
+            args: [1,0,1,1]
+            stdout: [{regex: "Al+a+rme"}]            
+          - name: Toutes les pompes en défaut
+            args: [1,1,1,1]
+            stdout: [{regex: "Al+a+rme"}]            
+      - name: operators/2.c
+        executable: ./2.out
+        tests:
+          - name: Aucun train, pas d'erreur
+            args: [0,0,0,0,0,0]
+            exit: 0
+          - name: Aucun train, mais 1 passage fermé
+            args: [0,0,0,0,0,1]
+            exit: 1
+          - name: Aucun train, mais 2 passages fermés
+            args: [0,0,0,1,0,1]
+            exit: 1
+          - name: Aucun train, mais 3 passages fermés
+            args: [0,0,0,1,1,1]
+            exit: 1            
+          - name: Aucun train, mais 4 passages fermés
+            args: [0,0,1,1,1,1]
+            exit: 1            
+          - name: Un train, mais un seul passage fermé
+            args: [1,0,0,0,0,1]
+            exit: 1
+          - name: Un train, mais seulement deux passages fermés
+            args: [0,1,0,1,0,1]
+            exit: 1
+          - name: Un train, mais seulement trois passages fermés
+            args: [1,0,0,1,1,1]
+            exit: 1            
+          - name: Un train, et tous les passages fermés
+            args: [1,0,1,1,1,1]
+            exit: 0           
+          - name: Deux trains, et tous les passages fermés
+            args: [1,1,1,1,1,1]
+            exit: 0                 
+      - name: operators/3.c
+        executable: ./3.out
+        tests:
+          - name: Valeur 0 
+            args: [1,1,1,1,1,1]
+            stdout: [{ equals: "┌───┐\n|   |\n│   │\n|   |\n└───┘"}]
+          - name: Valeur 1 
+            args: [0,1,1,0,0,0]
+            stdout: [{ equals: "\n    /\n\n   /\n\n"}]
+          - name: Valeur 2
+            args: [0,1,1,0,0,0]
+            stdout: [{ equals: " ───┐\n    |\n┌───┘\n|   \n└───"}]  
+          - name: Valeur 3
+            args: [0,1,1,0,0,0]
+            stdout: [{ equals: " ───┐\n    |\n ───┤\n    |\n ───┘"}]    
+          - name: Valeur 4
+            args: [102]
+            stdout: [{ equals: " ───┐\n    |\n ───┤\n    |\n ───┘\n"}]                
+          - name: Valeur 5
+            args: [0,1,1,0,0,0]
+            stdout: [{ equals: "  \n|   |\n└───┤\n    |\n  "}]                                    
+          - name: Valeur 6 
+            args: [0,1,1,0,0,0]
+            stdout: [{ equals: "┌─── \n|   \n├───┐\n|   |\n└───┘"}]
+          - name: Valeur E 
+            args: [0,1,1,0,0,0]
+            stdout: [{ equals: "┌─── \n|   \n├───\n|   \n└───"}]
+
+            

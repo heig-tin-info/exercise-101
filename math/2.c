@@ -9,3 +9,7 @@
 #include <stdio.h>
 
 double foo = 2;
+
+int main() {
+    printf("%f", sqrt(foo));
+}

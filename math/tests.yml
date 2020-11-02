@@ -1,0 +1,19 @@
+#!/bin/env/python3 -mbaygon
+---
+version: 1
+tests:
+  - name: math
+    tests:
+      - name: math/1.c
+        executable: ./1.out
+        tests:
+          - name: Affichage du cube
+            stdout: 125
+          - name: Status de sortie
+            exit: 0
+          - name: Pas d'operateur multiplication
+            executable: cat
+            stdin: [./1.c]
+            stdout: 
+              - not: 
+                  pattern: \*
