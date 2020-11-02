@@ -5,5 +5,4 @@
 
 int main(void) {
     int foo = 42;
-
 }

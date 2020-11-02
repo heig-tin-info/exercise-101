@@ -1,17 +1,17 @@
 CSRCS=$(wildcard **/*.c)
-COBJS=$(patsubst %.c,%.o,$(CSRCS))
+CEXECS=$(patsubst %.c,%.out,$(CSRCS))
 
 CFLAGS=-std=c99 -g -Wall -pedantic
 LDFLAGS=-lm
 
+$(CEXECS): %.out: %.c
+	gcc 
 all: test
 
 test: lib $(EXEC)
-	@echo -e '\e[1;34mRun tests...\e[m'
-	./test.py
+	python3 -mbaygon 
 
 clean:
-	@echo -e '\e[1;34mCleaning...\e[m'
 	$(RM) $(EXEC) *.o a.out lib$(EXEC).so
 
 .PHONY: test all format build lib
