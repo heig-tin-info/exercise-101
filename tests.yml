@@ -1,0 +1,6 @@
+#!/bin/env/python3 -mbaygon
+---
+version: 1
+tests:
+  - name: printf
+    tests:

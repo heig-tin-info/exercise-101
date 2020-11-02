@@ -1,7 +1,8 @@
-/**
- * Complétez les blancs
- */
+#include <stdio.h>
 
+/**
+ * Remplacez les ___ par le bon mot
+ */
 int main(void) {
     printf("Les variables passées à la fonction `...` doivent être "
            "préfixées du caractère '&'.\n");

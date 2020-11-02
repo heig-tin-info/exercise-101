@@ -6,7 +6,7 @@
  *
  * Votre numéro de téléphone doit respecter le format E.123 (e.g. +41 791234567)
  *
- * Remplacer les points de suspension par la structure idoine.
+ * Remplacer les points de suspension par la structure appropriée.
  */
 #include <stdio.h>
 #include <stdint.h>

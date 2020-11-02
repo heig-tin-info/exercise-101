@@ -1,0 +1,68 @@
+#!/bin/env/python3 -mbaygon
+---
+version: 1
+tests:
+  - name: scanf
+    tests:
+      - name: scanf/1.c
+        executable: ./1.out
+        tests:
+          - name: Affiche valeur de stdin
+            stdin: 12
+            stdout: [{contains: 12}]
+            exit: 0
+          - name: Fonctionne avec des nombres négatifs
+            stdin: -42
+            stdout: [{contains: -42}]
+            exit: 0
+          - name: Erreur en cas de mauvaise valeur
+            stdin: foo
+            exit: 1
+      - name: scanf/2.c
+        executable: ./2.out
+        tests:
+          - name: Affiche la somme de deux entiers
+            stdin: 12 23
+            stdout: [{trim: true, equals: 35}]
+            exit: 0
+          - name: Fonctionne avec des nombres négatifs
+            stdin: -5 5
+            stdout: [{trim: true, equals: 0}]
+            exit: 0
+          - name: Erreur en cas de mauvaise valeur
+            stdin: foo
+            exit: 1
+      - name: scanf/3.c
+        executable: ./3.out
+        tests:
+          - name: Affichage du pays
+            stdin: suisse
+            stdout: [{contains: suisse}]
+            exit: 0
+          - name: Affichage de la question "Donnez-moi un pays"
+            stdin: suisse
+            stdout: [{contains: Donnez-moi un pays}]
+          - name: Affichage de la réponse "Le pays est"
+            stdin: suisse
+            stdout: [{contains: Le pays est}]
+      - name: scanf/4.c
+        executable: ./4.out
+        tests:
+          - name: Moyenne des nombres
+            stdin: 5 6 12 66 55 9 3
+            stdout: [{contains: 22.28}]
+          - name: Affichage de 4 décimales
+            stdin: 5 6 12 66 55 9 3
+            stdout: [{regex: "\\b\\.\\d{4}\\b"}]
+          - name: Status de sortie vaut 0
+            stdin: 5 6 12 66 55 9 3
+            exit: 0
+      - name: scanf/5.c
+        executable: ./5.out
+        tests:
+          - name: Premier blanc
+            stdout: [{contains: scanf }]
+          - name: Second blanc
+            stdout: [{contains: '&' }]
+          - name: Status de sortie
+            exit: 0

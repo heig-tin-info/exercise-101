@@ -1,0 +1,56 @@
+#!/bin/env/python3 -mbaygon
+---
+version: 1
+tests:
+  - name: printf
+    tests:
+      - name: printf/1.c
+        executable: ./1.out
+        tests:
+          - name: Affichage de hello, world sur la sortie standard
+            stdout: [{regex: "hello\\s*,\\s*world"}]
+          - name: Status de sortie
+            exit: 0
+      - name: printf/2.c
+        executable: ./2.out
+        tests:
+          - name: Affichage de la variable foo à l'écran
+            stdout: [{regex: \b42\b}]
+          - name: Status de sortie
+            exit: 0
+      - name: printf/3.c
+        executable: ./3.out
+        tests:
+          - name: Affichage de la variable foo à l'écran
+            stdout: [{regex: \b3.141592\b}]
+          - name: Status de sortie
+            exit: 0
+      - name: printf/4.c
+        executable: ./4.out
+        tests:
+          - name: Affichage avec 2 digits après la virgule
+            stdout: [{regex: \b\.\d\d\b}]
+          - name: Status de sortie
+            exit: 0
+          - name: 5 zéros devant le nombre
+            stdout: [{regex: "\\b(?<!0)0{5}[^0]"}]
+      - name: printf/5.c
+        executable: ./5.out
+        tests:
+          - name: Affichage des valeurs séparées par un séparateur
+            stdout: [{regex: "23.*?3\\.1415.*?6.28.*?99" }]
+          - name: Status de sortie
+            exit: 0
+          - name: Affichage des valeurs séparées par une tabulation
+            stdout: [{regex: "23\\t3\\.1415\\d*\\t6.28\\d*\\t99" }]
+      - name: printf/6.c
+        executable: ./6.out
+        tests:
+          - name: Question 1
+            stdout: [{regex: "Q1[^']+'(z)(7)\\1 {5}\\2\\1\\\\n'" }]
+          - name: Question 2
+            stdout: [{regex: "Q2[^']+'77\\.0{6}\\\\n'" }]
+          - name: Question 3
+            stdout: [{regex: "Q3[^']+'36,1e,1E\\\\n'" }]
+          - name: Question 4
+            stdout: [{regex: "Q4[^']+'(7)\\1\\\\n'" }]

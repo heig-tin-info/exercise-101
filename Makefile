@@ -1,7 +1,7 @@
 CSRCS=$(wildcard **/*.c)
 CEXECS=$(patsubst %.c,%.out,$(CSRCS))
 
-CFLAGS=-std=c99 -g -Wall -pedantic
+CFLAGS=-std=c11 -g -Wall -pedantic
 LDFLAGS=-lm
 
 $(CEXECS): %.out: %.c
@@ -14,4 +14,4 @@ test: lib $(EXEC)
 clean:
 	$(RM) $(EXEC) *.o a.out lib$(EXEC).so
 
-.PHONY: test all format build lib
+.PHONY: test all

@@ -3,7 +3,6 @@
  * sur l'écran, espacés par des tabulations `\t`.
  *
  */
-
 #include <stdio.h>
 
 int foo = 23;
