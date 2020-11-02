@@ -5,4 +5,5 @@
 
 int main(void) {
     float foo = 3.141592;
+    printf("%f", foo);
 }

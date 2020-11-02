@@ -17,22 +17,26 @@ int main(void) {
     char q0[] = "hello 42\\n";
 
     // Que doit être la sortie sur l'écran de:
-    // printf("z%dz%6dz\n", i, i);
-    char q1[] = "";
+    //printf("z%dz%6dz\n", i, i);
+    char q1[] = "z7z     7z\\n";
 
     // Que doit être la sortie sur l'écran de
-    // printf("%d%f\n", i, f);
-    char q2[] = "";
+    //printf("%d%.6f\n", i, f);
+    char q2[] = "77.000000\\n";
 
     // Que doit être la sortie sur l'écran de
-    // printf("%o,%x,%X\n", 30, 30, 30);
-    char q3[] = "";
+    //printf("%o,%x,%X", 30, 30, 30);
+    char q3[] = "36,1e,1E";
 
     // Que doit être la sortie sur l'écran de
-    // printf("%d%1.0f\n", i, f);
-    char q4[] = "";
+    //printf("%d%1.0f\n", i, f);
+    char q4[] = "77";
 
 
     // Affichage pour les tests
-    printf("Q1. '%s'\nQ2. '%s'\nQ3. '%s'\nQ4. '%s'\n", q1, q2, q3, q4);
+    printf("Q0. '%s'\n"
+           "Q1. '%s'\n"
+           "Q2. '%s'\n"
+           "Q3. '%s'\n"
+           "Q4. '%s'\n", q0, q1, q2, q3, q4);
 }

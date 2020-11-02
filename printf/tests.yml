@@ -49,8 +49,36 @@ tests:
           - name: Question 1
             stdout: [{regex: "Q1[^']+'(z)(7)\\1 {5}\\2\\1\\\\n'" }]
           - name: Question 2
-            stdout: [{regex: "Q2[^']+'77\\.0{6}\\\\n'" }]
+            stdout: [{regex: "Q2[^']+'(7)\\1\\.0{6}\\\\n'" }]
           - name: Question 3
-            stdout: [{regex: "Q3[^']+'36,1e,1E\\\\n'" }]
+            stdout: [{regex: "Q3[^']+'36,1e,1E'" }]
           - name: Question 4
-            stdout: [{regex: "Q4[^']+'(7)\\1\\\\n'" }]
+            stdout: [{regex: "Q4[^']+'(7)\\1'" }]
+      - name: printf/7.c
+        executable: ./7.out
+        tests:
+          - name: Affichage du nom comme demandé
+            stdout: [{regex: Name:\s+\w+ }]
+          - name: Affichage de la date format YYYY
+            stdout: [{regex: Birth Year:\s+(19|20)\d\d }]
+          - name: Affichage du code pays
+            stdout: [{regex: Mobile:\s+\+\d+\s+ }]
+          - name: Affichage du numéro de téléphone
+            stdout: [{regex: Mobile:\s+\+\d+\s+\d+ }]
+      - name: printf/8.c
+        executable: ./8.out
+        tests:
+          - name: a + c = 212
+            stdout: [{contains: a + c = 212 }]
+          - name: x + c = 89.13
+            stdout: [{contains: x + c = 89.13 }]
+          - name: dx + x = +0003.28
+            stdout: [{contains: dx + x = +0003.28 }]
+          - name: ((int) dx) + ax = 1234567891
+            stdout: [{contains: ((int) dx) + ax = 1234567891 }]
+          - name: a + s = 0x1048
+            stdout: [{contains: a + s = 0x1048 }]                                
+          - name: s + b = 040004
+            stdout: [{contains: s + b = 040004 }]                                
+          - name: ax * ux = 3137738107249052100
+            stdout: [{contains: ax * ux = 3137738107249052100 }]  
